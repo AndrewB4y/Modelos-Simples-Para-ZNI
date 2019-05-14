@@ -1,3 +1,4 @@
+// compile with: "gcc ert_main.c diesel_vsi.c rt_nonfinite.c rtGetInf.c rtGetNaN.c libmcp3204.c  -lm -lwiringPi -lrt -Wall"
 /*
 * File: ert_main.c
 *

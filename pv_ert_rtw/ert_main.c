@@ -1,3 +1,4 @@
+// compile with "gcc ert_main.c pv_csi.c pv_csi_data.c rt_nonfinite.c rtGetInf.c rtGetNaN.c libmcp3204.c  -lm -lwiringPi -lrt -Wall -lpthread
 /*
 * File: ert_main.c
 *
