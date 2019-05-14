@@ -1,4 +1,4 @@
-// compile with: "gcc ert_main.c diesel_vsi.c rt_nonfinite.c rtGetInf.c rtGetNaN.c libmcp3204.c  -lm -lwiringPi -lrt -Wall"
+// compile with: "gcc ert_main.c diesel_vsi.c rt_nonfinite.c rtGetInf.c rtGetNaN.c -lm -lwiringPi -lrt -Wall"
 /*
 * File: ert_main.c
 *
@@ -122,10 +122,10 @@ extern int clock_nanosleep(clockid_t __clock_id, int __flags,
     /* Save FPU context here (if necessary) */
     /* Re-enable timer or interrupt here */
     /* Set model inputs here */
-    par=0.1;//1.4;
+    par=5;//1.4;
     vref=1000;            //Tension de ref del bus DC que va al inversor
-    Vload = 170;          //Tension proveniente de la carga
-    iinv = 20;            //Corriente salida del inversor
+    Vload = 5;          //Tension proveniente de la carga
+    iinv = 5;            //Corriente salida del inversor
 
     //set_Pref_d(Pref_d);
     //set_Qref_d(Qref_d);

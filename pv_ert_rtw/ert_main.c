@@ -1,4 +1,4 @@
-// compile with "gcc ert_main.c pv_csi.c pv_csi_data.c rt_nonfinite.c rtGetInf.c rtGetNaN.c libmcp3204.c  -lm -lwiringPi -lrt -Wall -lpthread
+// compile with "gcc ert_main.c pv.c pv_data.c rt_nonfinite.c rtGetInf.c rtGetNaN.c -lm -lwiringPi -lrt -Wall -lpthread
 /*
 * File: ert_main.c
 *
@@ -26,7 +26,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include <wiringPi.h>
-#include <ncurses.h>
+//include <ncurses.h>
 
 
 //Emulacion de panel
@@ -57,7 +57,7 @@ double ipv=0.0;
 double vload3=0.0;
 double Prefd=0.0;
 double Qrefd=0.0;
-MCP3204 ad_MCP3204;
+//MCP3204 ad_MCP3204;
 int fileDescriptor;
 char error[55];
 
@@ -225,6 +225,7 @@ extern int clock_nanosleep(clockid_t __clock_id, int __flags,
 
     //ipv=1.5;//500;   //Proveniente de la fuente de generación PV
     ipv=Ia;
+    ipv=1.5;
     iinv = 50.0;                //lectura de la corriente del inversor
     set_Idc_PV(ipv);            //asigna corriente proveniente del arreglo de paneles fotovoltaicos
     set_Iinv_PV(iinv);          //asigna corriente proveniente del inversor
@@ -235,27 +236,13 @@ extern int clock_nanosleep(clockid_t __clock_id, int __flags,
     /* Step the model for base rate */
     pv_step();
 
+    /* Get model outputs here */
     vdc=get_Vdc();
     soc = get_SOC();
 
     printf("Tension salida dc: %3.2f \n",vdc);
     printf("El estado de la bateria es: %3.2f \n",soc);
 
-
-    i3a=i3*10;
-
-    memset(buffer3,0,sizeof(buffer3));
-    //sprintf(buffer,"p%07dq%07dv%07ds%07d\n",Pma,Qma,Vloada,soca);
-    sprintf(buffer3,"v%07d\n",i3a);
-    //while(pinr==0){
-    serialPuts(fd3,buffer3);
-    serialFlush(fd3);
-    //pinr=digitalRead(2);
-    //printf("El dato pin es: %d \n",pinr);
-    //}
-    serialFlush(fd3);
-    tcflush(fd3, TCIOFLUSH);
-    /* Get model outputs here */
 
     /* Indicate task complete */
     OverrunFlag = false;
