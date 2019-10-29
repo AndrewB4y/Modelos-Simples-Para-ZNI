@@ -1,0 +1,1 @@
+gcc ert_main.c carga_sf.c rt_nonfinite.c rtGetInf.c rtGetNaN.c libmcp3204.c -lm -lwiringPi
